@@ -6,7 +6,6 @@ import {Product} from "../entity/product.entity";
 import {OrderItem} from "../entity/order-item.entity";
 import Stripe from "stripe";
 import {client} from "../index";
-import {User} from "../entity/user.entity";
 import {createTransport} from "nodemailer";
 import {Kafka} from "kafkajs";
 import producer from "../Kafka/config";
@@ -33,7 +32,6 @@ export const CreateOrder = async (req: Request, res: Response) => {
 
     const link = await getRepository(Link).findOne({
         where: {code: body.code},
-        relations: ['user']
     });
 
     if (!link) {
@@ -49,8 +47,7 @@ export const CreateOrder = async (req: Request, res: Response) => {
         await queryRunner.startTransaction();
 
         let order = new Order();
-        order.user_id = link.user.id;
-        order.ambassador_email = link.user.email;
+        order.ambassador_email = link.email;
         order.code = body.code;
         order.first_name = body.first_name;
         order.last_name = body.last_name;
@@ -130,8 +127,6 @@ export const ConfirmOrder = async (req: Request, res: Response) => {
     }
 
     await repository.update(order.id, {complete: true});
-
-    const user = await getRepository(User).findOne(order.user_id);
 
     const value = JSON.stringify({
         ...order,

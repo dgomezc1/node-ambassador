@@ -17,7 +17,7 @@ export const CreateLink = async (req: Request, res: Response) => {
     const user = req['user'];
 
     const link = await getRepository(Link).save({
-        user,
+        email: user.email,
         code: Math.random().toString(36).substring(6),
         products: req.body.products.map(id => ({id}))
     });
@@ -29,7 +29,7 @@ export const Stats = async (req: Request, res: Response) => {
     const user = req['user'];
 
     const links = await getRepository(Link).find({
-        where: {user},
+        where: { email: user.email },
         relations: ['orders', 'orders.order_items']
     });
 
@@ -49,6 +49,6 @@ export const GetLink = async (req: Request, res: Response) => {
         where: {
             code: req.params.code
         },
-        relations: ['user', 'products']
+        relations: ['products']
     }))
 }

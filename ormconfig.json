@@ -1,11 +1,13 @@
 {
   "type": "mysql",
-  "host": "35.185.250.229",
+  "host": "db",
   "port": 3306,
   "username": "root",
-  "password": "password",
-  "database": "user-db",
+  "password": "root",
+  "database": "ambassador",
   "synchronize": true,
   "logging": false,
-  "entities": ["src/entity/*.ts"]
+  "entities": [
+    "src/entity/*.ts"
+  ]
 }

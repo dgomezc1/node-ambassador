@@ -11,9 +11,6 @@ export class Order {
     transaction_id: string;
 
     @Column()
-    user_id: number;
-
-    @Column()
     code: string;
 
     @Column()

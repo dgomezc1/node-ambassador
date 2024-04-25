@@ -1,7 +1,7 @@
 import {Router} from "express";
 import {AuthenticatedUser, Logout, UpdateInfo,} from "./controller/auth.controller";
 import {AuthMiddleware} from "./middleware/auth.middleware";
-import {Ambassadors, Rankings} from "./controller/user.controller";
+import { Rankings} from "./controller/user.controller";
 import {
     CreateProduct,
     DeleteProduct,
@@ -18,8 +18,8 @@ export const routes = (router: Router) => {
     // Admin
     router.get('/api/admin/user', AuthMiddleware, AuthenticatedUser);
     router.post('/api/admin/logout', AuthMiddleware, Logout);
-    router.put('/api/admin/users/info', AuthMiddleware, UpdateInfo)
-    router.get('/api/admin/ambassadors', AuthMiddleware, Ambassadors);
+    // router.put('/api/admin/users/info', AuthMiddleware, UpdateInfo)
+    // router.get('/api/admin/ambassadors', AuthMiddleware, Ambassadors);
     router.get('/api/admin/products', AuthMiddleware, Products);
     router.post('/api/admin/products', AuthMiddleware, CreateProduct);
     router.get('/api/admin/products/:id', AuthMiddleware, GetProduct);
