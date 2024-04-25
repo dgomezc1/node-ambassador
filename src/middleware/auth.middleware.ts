@@ -5,9 +5,10 @@ import {User} from "../entity/user.entity";
 
 export const AuthMiddleware = async (req: Request, res: Response, next: Function) => {
     try {
-        const jwt = req.cookies['jwt'];
+        const jwt = req.cookies['access_token'];
 
-        const payload: any = verify(jwt, process.env.SECRET_KEY);
+        const payload: any = verify(jwt, 'egzjmHWIo08NcDSbS-7olRWVQORsxnpzRVes5nWCn2s');
+        console.log(payload);
 
         if (!payload) {
             return res.status(401).send({
