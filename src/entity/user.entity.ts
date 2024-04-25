@@ -1,30 +1,25 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity()
+@Entity("user")
 export class User {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    first_name: string;
+  @Column()
+  first_name: string;
 
-    @Column()
-    last_name: string;
+  @Column()
+  last_name: string;
 
-    @Column({
-        unique: true
-    })
-    email: string;
+  @Column({
+    unique: true,
+  })
+  email: string;
 
-    @Column({
-        select: false
-    })
-    password: string;
+  @Column()
+  is_admin: boolean;
 
-    @Column()
-    is_ambassador: boolean;
-
-    get name(): string {
-        return this.first_name + ' ' + this.last_name;
-    }
+  get name() {
+    return this.first_name + " " + this.last_name;
+  }
 }

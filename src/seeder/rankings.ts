@@ -12,7 +12,7 @@ createConnection().then(async () => {
     await client.connect();
 
     const ambassadors = await getRepository(User).find({
-        is_ambassador: true
+        is_admin: false
     });
 
     const orderRepository = getRepository(Order)

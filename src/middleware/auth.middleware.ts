@@ -18,9 +18,12 @@ export const AuthMiddleware = async (req: Request, res: Response, next: Function
 
         const is_ambassador = req.path.indexOf('api/ambassador') >= 0;
 
-        const user = await getRepository(User).findOne(payload.id);
+        const user = await getRepository(User).findOne({ where: { email: payload.userEmail} });
+
+        console.log(user)
 
         if ((is_ambassador && payload.scope !== 'ambassador') || (!is_ambassador && payload.scope !== 'admin')) {
+            console.log("Buenas tardes");
             return res.status(401).send({
                 message: 'unauthorized'
             });

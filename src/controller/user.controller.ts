@@ -5,7 +5,7 @@ import {client} from "../index";
 
 export const Ambassadors = async (req: Request, res: Response) => {
     res.send(await getRepository(User).find({
-        is_ambassador: true
+        is_admin: false
     }));
 }
 

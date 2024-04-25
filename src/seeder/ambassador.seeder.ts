@@ -13,8 +13,7 @@ createConnection().then(async () => {
             first_name: faker.name.firstName(),
             last_name: faker.name.lastName(),
             email: faker.internet.email(),
-            password,
-            is_ambassador: true
+            is_admin: false
         })
     }
 
