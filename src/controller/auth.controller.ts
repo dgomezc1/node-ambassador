@@ -15,7 +15,7 @@ export const AuthenticatedUser = async (req: Request, res: Response) => {
 
     const orders = await getRepository(Order).find({
         where: {
-            ambassador_email: user.userEmail,
+            ambassador_email: user.email,
             complete: true
         },
         relations: ['order_items']
