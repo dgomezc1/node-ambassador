@@ -3,9 +3,10 @@ import {getRepository} from "typeorm";
 import {Link} from "../entity/link.entity";
 
 export const Links = async (req: Request, res: Response) => {
+    console.log(req.params.id);
     const links = await getRepository(Link).find({
         where: {
-            user: req.params.id
+            email: req.params.id
         },
         relations: ['orders', 'orders.order_items']
     });
