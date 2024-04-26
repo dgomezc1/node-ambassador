@@ -33,8 +33,9 @@ export const ProductsFrontend = async (req: Request, res: Response) => {
     let products = JSON.parse(await client.get('products_frontend'));
 
     if (!products) {
+        console.log("No ya prodcutos")
         products = await getRepository(Product).find();
-
+        console.log(products)
         await client.set('products_frontend', JSON.stringify(products), {
             EX: 1800 //30 min
         });
