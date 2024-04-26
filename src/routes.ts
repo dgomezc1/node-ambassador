@@ -1,7 +1,7 @@
 import {Router} from "express";
 import {AuthenticatedUser, Logout, UpdateInfo,} from "./controller/auth.controller";
 import {AuthMiddleware} from "./middleware/auth.middleware";
-import { Rankings} from "./controller/user.controller";
+import { Rankings, HealthCheck} from "./controller/user.controller";
 import {
     CreateProduct,
     DeleteProduct,
@@ -38,6 +38,7 @@ export const routes = (router: Router) => {
     router.post('/api/ambassador/links', AuthMiddleware, CreateLink);
     router.get('/api/ambassador/stats', AuthMiddleware, Stats);
     router.get('/api/ambassador/rankings', AuthMiddleware, Rankings);
+    router.get('/api/ambassador/health_check', HealthCheck);
 
     // Checkout
     router.get('/api/checkout/links/:code', GetLink);
