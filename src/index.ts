@@ -12,7 +12,18 @@ export const client = createClient({
     url: 'redis://redis:6379'
 });
 
-createConnection().then(async () => {
+createConnection(
+    {
+        "type": "mysql",
+        "host": process.env.DATABASE_HOST,
+        "port": 3306,
+        "username": process.env.DB_USERNAME,
+        "password": process.env.DB_PASSWORD,
+        "database": process.env.DB_DATABASE,
+        "synchronize": true,
+        "logging": false,
+        "entities": ["src/entity/*.ts"]
+    }).then(async () => {
     await client.connect();
 
     const app = express();
