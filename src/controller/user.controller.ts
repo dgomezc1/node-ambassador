@@ -29,6 +29,6 @@ export const Rankings = async (req: Request, res: Response) => {
     }, {}));
 }
 
-export const HealthCheck = async(req: Request, res: Respond) =>{
+export const HealthCheck = async(req: Request, res: Response) =>{
     res.send();
 }
