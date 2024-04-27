@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: redis
+  name: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: redis
+  template:
+    metadata:
+      labels:
+        service: redis
+    spec:
+      containers:
+        - image: redis
+          name: redis
+          ports:
+            - containerPort: 6379
+          resources:
+            limits:
+              cpu: "0.1" # límite de CPU
+              memory: "512Mi" # límite de memoria
+            requests:
+              cpu: "0.05" # solicitud mínima de CPU
+              memory: "256Mi" # solicitud mínima de memoria
+      restartPolicy: Always
