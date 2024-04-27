@@ -4,7 +4,13 @@ import {getRepository} from "typeorm";
 
 export const AuthMiddleware = async (req: Request, res: Response, next: Function) => {
     try {
-        const jwt = req.cookies['access_token'];
+        const jwt = req.headers['credentials'];
+
+        if (!jwt) {
+            return res.status(401).send({
+                message: 'unauthenticated'
+            });
+        }
 
         const payload: any = verify(jwt, 'egzjmHWIo08NcDSbS-7olRWVQORsxnpzRVes5nWCn2s');
 

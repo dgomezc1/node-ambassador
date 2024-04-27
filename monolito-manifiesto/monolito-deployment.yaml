@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: monolito
+  name: monolito
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: monolito
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        service: monolito
+    spec:
+      containers:
+        - image: miguelzapataj/tt
+          
+          name: monolito
+          ports:
+            - containerPort: 8000
+          env:
+          - name: DATABASE_HOST
+            value: "35.185.250.229"
+          - name: DB_USERNAME
+            value: "root"
+          - name: DB_PASSWORD
+            value: "password"
+          - name: DB_DATABASE
+            value: "user-db"
+          # resources:
+          #   limits:
+          #     cpu: "0.1" # límite de CPU
+          #     memory: "256Mi" # límite de memoria
+          #   requests:
+          #     cpu: "0.05" # solicitud mínima de CPU
+          #     memory: "128Mi" # solicitud mínima de memoria
+      restartPolicy: Always
